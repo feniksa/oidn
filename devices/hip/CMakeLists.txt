@@ -10,7 +10,7 @@ set(OIDN_ROOT_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../..")
 include(${OIDN_ROOT_SOURCE_DIR}/cmake/oidn_version.cmake)
 
 # Project
-project(OpenImageDenoise_device_hip
+project(OpenImageDenoiseAMD_device_hip
   VERSION ${OIDN_VERSION}
   LANGUAGES CXX
 )
@@ -45,11 +45,11 @@ set(OIDN_HIP_SOURCES
   hip_module.cpp
 )
 
-add_library(OpenImageDenoise_device_hip SHARED ${OIDN_HIP_SOURCES} ${OIDN_GPU_SOURCES} ${OIDN_RESOURCE_FILE})
-set_property(TARGET OpenImageDenoise_device_hip PROPERTY VERSION ${PROJECT_VERSION})
-set_property(TARGET OpenImageDenoise_device_hip PROPERTY CXX_STANDARD 17)
+add_library(OpenImageDenoiseAMD_device_hip SHARED ${OIDN_HIP_SOURCES} ${OIDN_GPU_SOURCES} ${OIDN_RESOURCE_FILE})
+set_property(TARGET OpenImageDenoiseAMD_device_hip PROPERTY VERSION ${PROJECT_VERSION})
+set_property(TARGET OpenImageDenoiseAMD_device_hip PROPERTY CXX_STANDARD 17)
 
-target_include_directories(OpenImageDenoise_device_hip
+target_include_directories(OpenImageDenoiseAMD_device_hip
   PRIVATE
     "${OIDN_ROOT_SOURCE_DIR}/external/composable_kernel/include"
     "${OIDN_ROOT_SOURCE_DIR}/external/composable_kernel/library/include"
@@ -61,12 +61,12 @@ set_source_files_properties(
 )
 
 # Fix warning: ignoring return value of function declared with 'nodiscard' attribute (HIP API)
-target_compile_options(OpenImageDenoise_device_hip PRIVATE -Wno-unused-result)
+target_compile_options(OpenImageDenoiseAMD_device_hip PRIVATE -Wno-unused-result)
 if(WIN32)
   # Fix warning: __declspec attribute 'dllexport' is not supported
-  target_compile_options(OpenImageDenoise_device_hip PRIVATE -Wno-ignored-attributes)
+  target_compile_options(OpenImageDenoiseAMD_device_hip PRIVATE -Wno-ignored-attributes)
 endif()
 
-target_link_libraries(OpenImageDenoise_device_hip PRIVATE OpenImageDenoise_core hip::device)
-oidn_strip_symbols(OpenImageDenoise_device_hip)
-oidn_install_module(OpenImageDenoise_device_hip)
+target_link_libraries(OpenImageDenoiseAMD_device_hip PRIVATE OpenImageDenoiseAMD_core hip::device)
+oidn_strip_symbols(OpenImageDenoiseAMD_device_hip)
+oidn_install_module(OpenImageDenoiseAMD_device_hip)

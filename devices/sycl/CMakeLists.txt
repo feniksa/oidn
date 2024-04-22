@@ -85,7 +85,7 @@ macro(oidn_add_sycl_library target)
   set_property(TARGET ${target} PROPERTY CXX_STANDARD 17)
   target_compile_options(${target} PRIVATE ${OIDN_SYCL_COMPILE_FLAGS})
   target_link_options(${target} PRIVATE ${OIDN_SYCL_LINK_FLAGS})
-  target_link_libraries(${target} PRIVATE OpenImageDenoise_core)
+  target_link_libraries(${target} PRIVATE OpenImageDenoiseAMD_core)
   oidn_install_module(${target})
 endmacro()
 

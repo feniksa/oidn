@@ -77,7 +77,7 @@ endif()
 oidn_generate_cpp_from_blob(OIDN_WEIGHTS_SOURCES "${OIDN_NAMESPACE}::blobs::weights" ${OIDN_WEIGHTS})
 if(OIDN_WEIGHTS_SOURCES)
   add_library(OpenImageDenoise_weights OBJECT ${OIDN_WEIGHTS_SOURCES})
-  install(TARGETS OpenImageDenoise_weights EXPORT OpenImageDenoise_Exports)
+  install(TARGETS OpenImageDenoise_weights EXPORT OpenImageDenoiseAMD_Exports)
 endif()
 
 ## -----------------------------------------------------------------------------
@@ -90,7 +90,7 @@ add_subdirectory(api)
 add_subdirectory(devices)
 
 # Export targets from the build tree for external projects
-export(EXPORT OpenImageDenoise_Exports
+export(EXPORT OpenImageDenoiseAMD_Exports
   FILE ${OIDN_BUILD_TREE_EXPORT_FILE}
 )
 
@@ -166,7 +166,7 @@ if(OIDN_INSTALL_DEPENDENCIES AND CMAKE_CXX_COMPILER_ID STREQUAL "IntelLLVM")
 endif()
 
 # Install CMake configuration files
-install(EXPORT OpenImageDenoise_Exports
+install(EXPORT OpenImageDenoiseAMD_Exports
   DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/OpenImageDenoise-${OIDN_VERSION}
   FILE OpenImageDenoiseTargets.cmake
   COMPONENT devel

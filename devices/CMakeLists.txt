@@ -42,7 +42,7 @@ if(OIDN_DEVICE_CUDA)
 
   list(JOIN CMAKE_PREFIX_PATH "|" _prefix_path_str)
 
-  ExternalProject_Add(OpenImageDenoise_device_cuda
+  ExternalProject_Add(OpenImageDenoiseAMD_device_cuda
     PREFIX cuda
     SOURCE_DIR ${PROJECT_SOURCE_DIR}/devices/cuda
     BINARY_DIR cuda/build
@@ -67,7 +67,7 @@ if(OIDN_DEVICE_CUDA)
       -DOIDN_DEVICE_CUDA_API:STRING=${OIDN_DEVICE_CUDA_API}
     BUILD_ALWAYS TRUE
     DEPENDS
-      OpenImageDenoise_core
+      OpenImageDenoiseAMD_core
   )
 
   # Due to limitations of CMake, the module is pre-installed at build time to a temporary location,
@@ -134,7 +134,7 @@ if(OIDN_DEVICE_HIP)
   list(APPEND _hip_prefix_path ${ROCM_PATH}/hip ${ROCM_PATH})
   list(JOIN _hip_prefix_path "|" _hip_prefix_path_str)
 
-  ExternalProject_Add(OpenImageDenoise_device_hip
+  ExternalProject_Add(OpenImageDenoiseAMD_device_hip
     PREFIX hip
     SOURCE_DIR ${PROJECT_SOURCE_DIR}/devices/hip
     BINARY_DIR hip/build
@@ -157,7 +157,7 @@ if(OIDN_DEVICE_HIP)
       -DOIDN_SANITIZER:STRING=${OIDN_SANITIZER}
     BUILD_ALWAYS TRUE
     DEPENDS
-      OpenImageDenoise_core
+      OpenImageDenoiseAMD_core
   )
 
   # Due to limitations of CMake, the module is pre-installed at build time to a temporary location,

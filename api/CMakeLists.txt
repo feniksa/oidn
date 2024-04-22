@@ -5,25 +5,25 @@ set(API_SOURCES
   api.cpp
 )
 
-add_library(OpenImageDenoise ${OIDN_LIB_TYPE} ${API_SOURCES} ${OIDN_RESOURCE_FILE})
-set_property(TARGET OpenImageDenoise PROPERTY VERSION ${PROJECT_VERSION})
-set_property(TARGET OpenImageDenoise PROPERTY SOVERSION ${PROJECT_VERSION_MAJOR})
+add_library(OpenImageDenoiseAMD ${OIDN_LIB_TYPE} ${API_SOURCES} ${OIDN_RESOURCE_FILE})
+set_property(TARGET OpenImageDenoiseAMD PROPERTY VERSION ${PROJECT_VERSION})
+set_property(TARGET OpenImageDenoiseAMD PROPERTY SOVERSION ${PROJECT_VERSION_MAJOR})
 
-target_include_directories(OpenImageDenoise
+target_include_directories(OpenImageDenoiseAMD
   PUBLIC
     $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
 )
 
-target_link_libraries(OpenImageDenoise PRIVATE OpenImageDenoise_core)
+target_link_libraries(OpenImageDenoiseAMD PRIVATE OpenImageDenoiseAMD_core)
 
 if(NOT OIDN_STATIC_LIB)
-  oidn_strip_symbols(OpenImageDenoise)
+  oidn_strip_symbols(OpenImageDenoiseAMD)
 endif()
 
-install(TARGETS OpenImageDenoise
+install(TARGETS OpenImageDenoiseAMD
   EXPORT
-    OpenImageDenoise_Exports
+    OpenImageDenoiseAMD_Exports
   ARCHIVE
     DESTINATION ${CMAKE_INSTALL_LIBDIR} COMPONENT devel
   LIBRARY

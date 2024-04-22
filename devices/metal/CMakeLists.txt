@@ -46,7 +46,7 @@ target_link_libraries(OpenImageDenoise_device_metal PRIVATE "-framework Foundati
 target_link_libraries(OpenImageDenoise_device_metal PRIVATE "-framework Metal")
 target_link_libraries(OpenImageDenoise_device_metal PRIVATE "-framework MetalPerformanceShadersGraph")
 target_link_libraries(OpenImageDenoise_device_metal PRIVATE "-framework MetalPerformanceShaders")
-target_link_libraries(OpenImageDenoise_device_metal PRIVATE OpenImageDenoise_core)
+target_link_libraries(OpenImageDenoise_device_metal PRIVATE OpenImageDenoiseAMD_core)
 
 if(OIDN_STATIC_LIB)
   oidn_install_static_module(OpenImageDenoise_device_metal)

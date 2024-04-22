@@ -39,4 +39,4 @@ target_include_directories(OpenImageDenoise_common
     $<BUILD_INTERFACE:${PROJECT_BINARY_DIR}>
 )
 
-install(TARGETS OpenImageDenoise_common EXPORT OpenImageDenoise_Exports)
+install(TARGETS OpenImageDenoise_common EXPORT OpenImageDenoiseAMD_Exports)

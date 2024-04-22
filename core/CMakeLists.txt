@@ -87,10 +87,10 @@ else()
   set(OIDN_CORE_LIB_TYPE SHARED)
 endif()
 
-add_library(OpenImageDenoise_core ${OIDN_CORE_LIB_TYPE} ${OIDN_CORE_SOURCES} ${OIDN_RESOURCE_FILE})
-set_property(TARGET OpenImageDenoise_core PROPERTY VERSION ${PROJECT_VERSION})
+add_library(OpenImageDenoiseAMD_core ${OIDN_CORE_LIB_TYPE} ${OIDN_CORE_SOURCES} ${OIDN_RESOURCE_FILE})
+set_property(TARGET OpenImageDenoiseAMD_core PROPERTY VERSION ${PROJECT_VERSION})
 
-target_link_libraries(OpenImageDenoise_core
+target_link_libraries(OpenImageDenoiseAMD_core
   PUBLIC
     OpenImageDenoise_common
   PRIVATE
@@ -98,16 +98,16 @@ target_link_libraries(OpenImageDenoise_core
 )
 
 if(TARGET OpenImageDenoise_weights)
-  target_link_libraries(OpenImageDenoise_core PRIVATE OpenImageDenoise_weights)
+  target_link_libraries(OpenImageDenoiseAMD_core PRIVATE OpenImageDenoise_weights)
 endif()
 
 if(OIDN_CORE_LIB_TYPE STREQUAL "SHARED")
-  oidn_export_all_symbols(OpenImageDenoise_core)
+  oidn_export_all_symbols(OpenImageDenoiseAMD_core)
 endif()
 
-install(TARGETS OpenImageDenoise_core
+install(TARGETS OpenImageDenoiseAMD_core
   EXPORT
-    OpenImageDenoise_Exports
+    OpenImageDenoiseAMD_Exports
   ARCHIVE
     DESTINATION ${CMAKE_INSTALL_LIBDIR} COMPONENT devel
   LIBRARY

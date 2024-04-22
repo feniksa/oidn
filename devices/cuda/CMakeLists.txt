@@ -14,7 +14,7 @@ set(OIDN_ROOT_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../..")
 include(${OIDN_ROOT_SOURCE_DIR}/cmake/oidn_version.cmake)
 
 # Project
-project(OpenImageDenoise_device_cuda
+project(OpenImageDenoiseAMD_device_cuda
   VERSION ${OIDN_VERSION}
   LANGUAGES CXX CUDA
 )
@@ -76,10 +76,10 @@ set_source_files_properties(
   PROPERTIES COMPILE_FLAGS "${OIDN_NVCC_SM80_FLAGS} ${OIDN_NVCC_SM90_FLAGS}"
 )
 
-add_library(OpenImageDenoise_device_cuda SHARED ${OIDN_CUDA_SOURCES} ${OIDN_GPU_SOURCES} ${OIDN_RESOURCE_FILE})
-set_property(TARGET OpenImageDenoise_device_cuda PROPERTY VERSION ${PROJECT_VERSION})
+add_library(OpenImageDenoiseAMD_device_cuda SHARED ${OIDN_CUDA_SOURCES} ${OIDN_GPU_SOURCES} ${OIDN_RESOURCE_FILE})
+set_property(TARGET OpenImageDenoiseAMD_device_cuda PROPERTY VERSION ${PROJECT_VERSION})
 
-target_include_directories(OpenImageDenoise_device_cuda
+target_include_directories(OpenImageDenoiseAMD_device_cuda
   PRIVATE
     ${CMAKE_CUDA_TOOLKIT_INCLUDE_DIRECTORIES}
     "${OIDN_ROOT_SOURCE_DIR}/external/cutlass/include"
@@ -91,7 +91,7 @@ if(OIDN_DEVICE_CUDA_API STREQUAL "Driver")
 
   add_library(curtn STATIC curtn.cpp)
   target_link_libraries(curtn PRIVATE CUDA::cuda_driver)
-  target_link_libraries(OpenImageDenoise_device_cuda PRIVATE curtn)
+  target_link_libraries(OpenImageDenoiseAMD_device_cuda PRIVATE curtn)
 
   set(OIDN_CUDA_RUNTIME_LIBRARY "None")
 elseif(OIDN_DEVICE_CUDA_API STREQUAL "RuntimeStatic")
@@ -102,12 +102,12 @@ else()
   message(FATAL_ERROR "Invalid OIDN_DEVICE_CUDA_API value")
 endif()
 
-set_target_properties(OpenImageDenoise_device_cuda
+set_target_properties(OpenImageDenoiseAMD_device_cuda
   PROPERTIES
     CUDA_ARCHITECTURES OFF
     CUDA_RUNTIME_LIBRARY ${OIDN_CUDA_RUNTIME_LIBRARY}
 )
 
-target_link_libraries(OpenImageDenoise_device_cuda PRIVATE OpenImageDenoise_core)
-oidn_strip_symbols(OpenImageDenoise_device_cuda)
-oidn_install_module(OpenImageDenoise_device_cuda)
+target_link_libraries(OpenImageDenoiseAMD_device_cuda PRIVATE OpenImageDenoiseAMD_core)
+oidn_strip_symbols(OpenImageDenoiseAMD_device_cuda)
+oidn_install_module(OpenImageDenoiseAMD_device_cuda)
